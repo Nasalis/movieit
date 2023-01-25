@@ -2,4 +2,4 @@
 /movieit/node_modules
 /movieit/dist
 /server/node_modules
-/.env
+/**/.env
