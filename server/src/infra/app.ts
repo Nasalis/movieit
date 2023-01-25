@@ -1,5 +1,9 @@
-import dotenv from "dotenv";
-import express, { Application as ExApp } from "express";
+import dotenv from 'dotenv';
+import express, { Application as ExApp, Handler } from 'express';
+
+import { controllers } from '../app/controllers';
+import { IRouter } from '../utils/handlers.decorator';
+import { MetadataKeys } from '../utils/metadata.keys';
 dotenv.config();
 
 class Application {
@@ -23,8 +27,34 @@ class Application {
   }
 
   private registerRouters() {
-    this._instance.get("/", (request, response) => {
-      response.json({ message: "Hello World!" });
+    const info: Array<{ api: string; handler: string }> = [];
+    controllers.forEach((controllerClass) => {
+      const controllerInstance: { [handleName: string]: Handler } =
+        new controllerClass() as any;
+
+      const basePath: string = Reflect.getMetadata(
+        MetadataKeys.BASE_PATH,
+        controllerClass,
+      );
+      const routers: IRouter[] = Reflect.getMetadata(
+        MetadataKeys.ROUTERS,
+        controllerClass,
+      );
+      const exRouter = express.Router();
+
+      routers.forEach(({ method, path, handlerName }) => {
+        exRouter[method](
+          path,
+          controllerInstance[String(handlerName)].bind(controllerInstance),
+        );
+
+        info.push({
+          api: `${method.toLocaleUpperCase()} ${basePath + path}`,
+          handler: `${controllerClass.name}.${String(handlerName)}`,
+        });
+      });
+
+      this.instance.use(basePath, exRouter);
     });
   }
 }
