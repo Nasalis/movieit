@@ -1,8 +1,9 @@
-import { IMovieProps } from '../app/entities/Movie';
+import { Movie } from '../app/entities/Movie';
+import Reception from '../app/objectValues/reception';
 
-export class JsonToMovieProps {
-  public static toMovieProps(jsonData: any): IMovieProps {
-    return {
+export class JsonToMovie {
+  public static toMovie(jsonData: any): Movie {
+    return new Movie({
       id: jsonData.id,
       backdrop_path: jsonData.backdrop_path,
       budget: jsonData.budget,
@@ -19,6 +20,7 @@ export class JsonToMovieProps {
       status: jsonData.status,
       tagline: jsonData.tagline,
       title: jsonData.title,
-    };
+      reception: new Reception().calculateReception(jsonData.vote_average),
+    });
   }
 }

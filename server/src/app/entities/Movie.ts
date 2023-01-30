@@ -1,3 +1,4 @@
+import { ReceptionSymbol } from '../../utils/receptionValues';
 import { Genre } from '../schemas/genre';
 import { ProductionCompanie } from '../schemas/productionCompanie';
 
@@ -18,6 +19,7 @@ export interface IMovieProps {
   status: string;
   tagline: string;
   title: string;
+  reception: ReceptionSymbol;
 }
 
 export class Movie {
