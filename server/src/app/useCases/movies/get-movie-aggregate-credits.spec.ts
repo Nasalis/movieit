@@ -9,7 +9,7 @@ describe('GetMovieAggregateCredits Use Case', () => {
   it("should return a list of actors of movie's cast", async () => {
     // Arrange
     const getMovieAggregateCredits = new GetMovieAggregateCredits();
-    const requestParameter = { id: 1578 };
+    const requestParameter = { id: '1578' };
     mockedAxios.get.mockResolvedValue({
       data: getMovieAggregateCreditsMock,
     });
@@ -38,7 +38,7 @@ describe('GetMovieAggregateCredits Use Case', () => {
   it("should return a list of members of movie's crew", async () => {
     // Arrange
     const getMovieAggregateCredits = new GetMovieAggregateCredits();
-    const requestParameter = { id: 1578 };
+    const requestParameter = { id: '1578' };
     mockedAxios.get.mockResolvedValue({
       data: getMovieAggregateCreditsMock,
     });

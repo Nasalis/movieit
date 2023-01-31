@@ -52,7 +52,7 @@ describe('GetMovie Use Case', () => {
       reception: new Reception().calculateReception(7.978),
     });
 
-    const result = await getMovie.execute({ id: 1578 });
+    const result = await getMovie.execute({ id: '1578' });
 
     expect(result.movie).toEqual(expectedResult);
   });

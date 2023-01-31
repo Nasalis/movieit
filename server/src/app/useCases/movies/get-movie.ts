@@ -3,7 +3,7 @@ import { tmdbAPI } from '../../../infra/config/axios';
 import { Movie } from '../../entities/Movie';
 
 interface IGetMovieRequest {
-  id: number;
+  id: string;
 }
 
 interface IGetMovieResponse {

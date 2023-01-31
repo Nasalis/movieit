@@ -1,11 +1,11 @@
 import { tmdbAPI } from '../../../infra/config/axios';
 
 interface IGetTopRatedResponse {
-  topRatedIds: { id: number }[];
+  topRatedIds: { id: string }[];
 }
 
 type TopRatedMovies = {
-  results: { id: number }[];
+  results: { id: string }[];
 };
 
 export class GetTopRated {

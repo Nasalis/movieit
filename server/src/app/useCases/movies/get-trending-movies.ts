@@ -1,11 +1,11 @@
 import { tmdbAPI } from '../../../infra/config/axios';
 
 interface IGetTrendingMoviesResponse {
-  trendingMoviesIds: { id: number }[];
+  trendingMoviesIds: { id: string }[];
 }
 
 type TrendingMoviesResponse = {
-  results: { id: number }[];
+  results: { id: string }[];
 };
 
 export class GetTrendingMovies {

@@ -2,7 +2,7 @@ import { tmdbAPI } from '../../../infra/config/axios';
 import { Cast } from '../../schemas/cast';
 
 interface IGetMovieAggregateCreditsRequest {
-  id: number;
+  id: string;
 }
 
 interface IGetMovieAggregateCreditsResponse {
