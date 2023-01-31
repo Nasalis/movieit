@@ -4,6 +4,8 @@ import Controller from '../../utils/controller.decorator';
 import { Get } from '../../utils/handlers.decorator';
 import { GetMovie } from '../useCases/movies/get-movie';
 import { GetMovieAggregateCredits } from '../useCases/movies/get-movie-aggregate-credits';
+import { GetMovieRecommendations } from '../useCases/movies/get-movie-recommendations';
+import { GetMovieReviews } from '../useCases/movies/get-movie-reviews';
 import { GetTopRated } from '../useCases/movies/get-top-rated';
 import { GetTrendingMovies } from '../useCases/movies/get-trending-movies';
 
@@ -13,19 +15,16 @@ export default class MovieController {
   private getTrendingMovies: GetTrendingMovies;
   private getTopRatedMovies: GetTopRated;
   private getMovieAggregateCredits: GetMovieAggregateCredits;
+  private getMovieRecommendations: GetMovieRecommendations;
+  private getMovieReviews: GetMovieReviews;
 
   constructor() {
     this.getMovie = new GetMovie();
     this.getTrendingMovies = new GetTrendingMovies();
     this.getTopRatedMovies = new GetTopRated();
     this.getMovieAggregateCredits = new GetMovieAggregateCredits();
-  }
-
-  @Get('')
-  public async index(request: Request, response: Response) {
-    const result = await this.getMovie.execute({ id: 1578 });
-    const cast = await this.getMovieAggregateCredits.execute({ id: 1578 });
-    response.json({ info: result.movie, credits: cast });
+    this.getMovieRecommendations = new GetMovieRecommendations();
+    this.getMovieReviews = new GetMovieReviews();
   }
 
   @Get('/trending')
@@ -50,5 +49,23 @@ export default class MovieController {
       }),
     ).then((result) => result);
     response.json(topRatedMovies.map((movie) => movie.props));
+  }
+
+  @Get('/:id')
+  public async index(request: Request, response: Response) {
+    const { id } = request.params;
+    const result = await this.getMovie.execute({ id });
+    const cast = await this.getMovieAggregateCredits.execute({ id });
+    const recommendations = await this.getMovieRecommendations.execute({
+      id,
+    });
+    const reviews = await this.getMovieReviews.execute({ id });
+
+    response.json({
+      info: result.movie,
+      credits: cast,
+      recommendations: recommendations,
+      reviews: reviews,
+    });
   }
 }
