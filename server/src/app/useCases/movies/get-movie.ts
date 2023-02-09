@@ -1,13 +1,13 @@
-import { JsonToMovieProps } from '../../adapter/jsonToMovieProps';
-import { tmdbAPI } from '../../infra/config/axios';
-import { IMovieProps } from '../entities/Movie';
+import { JsonToMovie } from '../../../adapter/jsonToMovieProps';
+import { tmdbAPI } from '../../../infra/config/axios';
+import { Movie } from '../../entities/Movie';
 
 interface IGetMovieRequest {
-  id: number;
+  id: string;
 }
 
 interface IGetMovieResponse {
-  movie: IMovieProps;
+  movie: Movie;
 }
 
 export class GetMovie {
@@ -16,7 +16,8 @@ export class GetMovie {
 
     const { data } = await tmdbAPI.get(`/movie/${id}?language=en-US`);
 
-    const movieConverted = JsonToMovieProps.toMovieProps(data);
+    const movieConverted = JsonToMovie.toMovie(data);
+
     return { movie: movieConverted };
   }
 }

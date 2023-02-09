@@ -1,0 +1,40 @@
+export const getMovieRecommendationsMock = {
+  results: [
+    {
+      adult: false,
+      backdrop_path: '/2W9HjAYWNug5RwyrEtrneXeL94Z.jpg',
+      id: 524,
+      title: 'Casino',
+      original_language: 'en',
+      original_title: 'Casino',
+      overview:
+        'In early-1970s Las Vegas, Sam "Ace" Rothstein gets tapped by his bosses to head the Tangiers Casino. At first, he\'s a great success in the job, but over the years, problems with his loose-cannon enforcer Nicky Santoro, his ex-hustler wife Ginger, her con-artist ex Lester Diamond and a handful of corrupt politicians put Sam in ever-increasing danger.',
+      poster_path: '/4TS5O1IP42bY2BvgMxL156EENy.jpg',
+      media_type: 'movie',
+      genre_ids: [80, 18],
+      popularity: 24.351,
+      release_date: '1995-11-22',
+      video: false,
+      vote_average: 8.013,
+      vote_count: 4892,
+    },
+    {
+      adult: false,
+      backdrop_path: '/a58oc5qGNazb3QOxEH8eG5S7gjr.jpg',
+      id: 103,
+      title: 'Taxi Driver',
+      original_language: 'en',
+      original_title: 'Taxi Driver',
+      overview:
+        'A mentally unstable Vietnam War veteran works as a night-time taxi driver in New York City where the perceived decadence and sleaze feed his urge for violent action.',
+      poster_path: '/ekstpH614fwDX8DUln1a2Opz0N8.jpg',
+      media_type: 'movie',
+      genre_ids: [80, 18],
+      popularity: 48.035,
+      release_date: '1976-02-09',
+      video: false,
+      vote_average: 8.168,
+      vote_count: 10289,
+    },
+  ],
+};
