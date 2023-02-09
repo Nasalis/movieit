@@ -2,7 +2,7 @@ import { ReceptionIcon } from "./ReceptionIcon";
 
 export function RecommendationCard() {
   return (
-    <div className="group w-[200px] h-full mr-8 scale-100 transition-all hover:scale-105">
+    <div className="group w-[200px] h-full mr-2 scale-100 transition-all hover:scale-105">
       <div className="relative">
         <img className="rounded-t-2xl grayscale duration-500 hover:grayscale-0" draggable={false} src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/wOi8s0WQZYlTDkWB46Z6p3ji5Fq.jpg" alt="" />
       </div>
