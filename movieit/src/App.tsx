@@ -64,7 +64,7 @@ function App() {
         </ul>
       </aside>
       <main  
-        className="grid col-start-2 col-end-5 w-full max-h-screen pl-8 py-4 gap-y-9 overflow-y-auto overflow-x-hidden"
+        className="grid col-start-2 col-end-5 w-full max-h-screen pl-8 py-4 gap-y-9 overflow-y-auto "
       >
         <div className="relative max-w-md">
           <MagnifyingGlass size={20} weight="fill" className="absolute top-2 left-3 text-gray-300" />
@@ -83,27 +83,13 @@ function App() {
           <h2 className="text-white text-4xl font-bold capitalize">
             Trending movies
           </h2>
-          <Slider>
-            <TrendingMovieCard 
-              backgroundPath="https://www.themoviedb.org/t/p/w533_and_h300_bestv2/wgq2oA1aJiawBlRDIU8agXk7DQQ.jpg"
-              posterPath="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/lLeWJU33HgfWTnrOcaNBR5fUcF1.jpg"
-            />
-            <TrendingMovieCard 
-              backgroundPath="https://www.themoviedb.org/t/p/w533_and_h300_bestv2/wgq2oA1aJiawBlRDIU8agXk7DQQ.jpg"
-              posterPath="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/lLeWJU33HgfWTnrOcaNBR5fUcF1.jpg"
-            />
-            <TrendingMovieCard 
-              backgroundPath="https://www.themoviedb.org/t/p/w533_and_h300_bestv2/wgq2oA1aJiawBlRDIU8agXk7DQQ.jpg"
-              posterPath="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/lLeWJU33HgfWTnrOcaNBR5fUcF1.jpg"
-            />
-            <TrendingMovieCard 
-              backgroundPath="https://www.themoviedb.org/t/p/w533_and_h300_bestv2/wgq2oA1aJiawBlRDIU8agXk7DQQ.jpg"
-              posterPath="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/lLeWJU33HgfWTnrOcaNBR5fUcF1.jpg"
-            />
-            <TrendingMovieCard 
-              backgroundPath="https://www.themoviedb.org/t/p/w533_and_h300_bestv2/wgq2oA1aJiawBlRDIU8agXk7DQQ.jpg"
-              posterPath="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/lLeWJU33HgfWTnrOcaNBR5fUcF1.jpg"
-            />
+          <Slider isTotalScreen>
+            {movies.map(el => (
+              <TrendingMovieCard 
+                backgroundPath={el.backgroundPath}
+                posterPath={el.posterPath}
+              />
+            ))}
           </Slider>
         </section>
         <section className="flex flex-col items-start justify-center gap-4">
