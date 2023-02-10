@@ -6,6 +6,7 @@ import { GetMovie } from '../useCases/movies/get-movie';
 import { GetMovieAggregateCredits } from '../useCases/movies/get-movie-aggregate-credits';
 import { GetMovieRecommendations } from '../useCases/movies/get-movie-recommendations';
 import { GetMovieReviews } from '../useCases/movies/get-movie-reviews';
+import { GetOfficialVideos } from '../useCases/movies/get-official-videos';
 import { GetTopRated } from '../useCases/movies/get-top-rated';
 import { GetTrendingMovies } from '../useCases/movies/get-trending-movies';
 
@@ -17,6 +18,7 @@ export default class MovieController {
   private getMovieAggregateCredits: GetMovieAggregateCredits;
   private getMovieRecommendations: GetMovieRecommendations;
   private getMovieReviews: GetMovieReviews;
+  private getOfficialTrailer: GetOfficialVideos;
 
   constructor() {
     this.getMovie = new GetMovie();
@@ -25,6 +27,7 @@ export default class MovieController {
     this.getMovieAggregateCredits = new GetMovieAggregateCredits();
     this.getMovieRecommendations = new GetMovieRecommendations();
     this.getMovieReviews = new GetMovieReviews();
+    this.getOfficialTrailer = new GetOfficialVideos();
   }
 
   @Get('/trending')
@@ -54,18 +57,28 @@ export default class MovieController {
   @Get('/:id')
   public async index(request: Request, response: Response) {
     const { id } = request.params;
-    const result = await this.getMovie.execute({ id });
-    const cast = await this.getMovieAggregateCredits.execute({ id });
-    const recommendations = await this.getMovieRecommendations.execute({
-      id,
-    });
-    const reviews = await this.getMovieReviews.execute({ id });
 
-    response.json({
-      info: result.movie,
-      credits: cast,
-      recommendations: recommendations,
-      reviews: reviews,
-    });
+    try {
+      const result = await this.getMovie.execute({ id });
+      const cast = await this.getMovieAggregateCredits.execute({ id });
+      const recommendations = await this.getMovieRecommendations.execute({
+        id,
+      });
+      const reviews = await this.getMovieReviews.execute({ id });
+      const trailer = await this.getOfficialTrailer.execute({ id });
+
+      response.json({
+        info: result.movie,
+        credits: cast,
+        recommendations: recommendations,
+        reviews: reviews,
+        videos: trailer.videos,
+      });
+    } catch (err) {
+      response.json({
+        error: 'Does not exists any data for this id',
+        status: 400,
+      });
+    }
   }
 }
