@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { Application as ExApp, Handler } from 'express';
 
@@ -16,6 +18,8 @@ class Application {
   constructor() {
     this._instance = express();
     this._instance.use(express.json());
+    this._instance.use(express.urlencoded({ extended: true }));
+    this._instance.use(cors());
     this.registerRouters();
   }
 
