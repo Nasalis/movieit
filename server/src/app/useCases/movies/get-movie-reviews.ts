@@ -25,16 +25,24 @@ export class GetMovieReviews {
   ): Promise<IGetMovieReviewsResponse> {
     const { id } = request;
 
-    const { data } = await tmdbAPI.get<axiosResponse>(
-      `movie/${id}/reviews?language=en-US`,
-    );
-
-    return {
-      results: data.results.map(this.turnOnReviewFormat),
-      currentPage: data.page,
-      totalPages: data.total_pages,
-      totalResults: data.total_results,
-    };
+    try {
+      const { data } = await tmdbAPI.get<axiosResponse>(
+        `movie/${id}/reviews?language=en-US`,
+      );
+      return {
+        results: data.results.map(this.turnOnReviewFormat),
+        currentPage: data.page,
+        totalPages: data.total_pages,
+        totalResults: data.total_results,
+      };
+    } catch (error) {
+      return {
+        results: [],
+        currentPage: 1,
+        totalPages: 0,
+        totalResults: 0,
+      };
+    }
   }
 
   private turnOnReviewFormat(review: Review) {
